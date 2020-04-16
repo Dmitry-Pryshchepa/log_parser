@@ -3,5 +3,8 @@
 require_relative 'log_parser/loader'
 require_relative 'log_parser/log_line'
 
+require_relative 'log_parser/processing/most_visited'
+require_relative 'log_parser/processing/most_unique_visited'
+
 module LogParser
 end
