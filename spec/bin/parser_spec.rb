@@ -9,7 +9,7 @@ RSpec.describe 'bin/parser' do
 
   describe 'script execution' do
     context 'when file argument is valid' do
-      let(:source) { './spec/fixtures/webserver.log' }
+      let(:source) { File.join('spec', 'fixtures', 'webserver.log') }
 
       it 'provides not empty output' do
         expect(subject[0]).not_to be_empty
@@ -21,7 +21,7 @@ RSpec.describe 'bin/parser' do
     end
 
     context 'when file not exist' do
-      let(:source) { './spec/fixtures/invalid_path.log' }
+      let(:source) { File.join('spec', 'fixtures', 'invalid_path.log') }
 
       it 'does not provide output' do
         expect(subject[0]).to be_empty
@@ -33,7 +33,7 @@ RSpec.describe 'bin/parser' do
     end
 
     context 'when file is empty' do
-      let(:source) { './spec/fixtures/empty_log.log' }
+      let(:source) { File.join('spec', 'fixtures', 'empty_log.log') }
 
       it 'does not provide output' do
         expect(subject[0]).to be_empty

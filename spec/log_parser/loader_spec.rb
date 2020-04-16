@@ -2,6 +2,7 @@
 
 RSpec.describe LogParser::Loader do
   subject { described_class.new(file) }
+
   let(:file) { File.join('spec', 'fixtures', 'webserver.log') }
   let(:example_line) { ['/home 127.0.0.1'] }
 

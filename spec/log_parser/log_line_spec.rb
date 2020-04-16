@@ -2,6 +2,7 @@
 
 RSpec.describe LogParser::LogLine do
   subject { described_class.new(url, ip) }
+
   let(:url) { '/home' }
   let(:ip) { '127.0.0.1' }
 
