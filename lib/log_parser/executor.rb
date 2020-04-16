@@ -2,12 +2,14 @@
 
 module LogParser
   class Executor
+    PROCESSORS = [Processing::MostVisited, Processing::MostUniqueVisited].freeze
+
     def initialize(source)
       @source = source
     end
 
     def perform
-      LogParser::PROCESSORS.each(&method(:present))
+      PROCESSORS.each(&method(:present))
     end
 
     private
