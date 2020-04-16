@@ -4,7 +4,7 @@ module LogParser
   module Processing
     class Sorter
       def self.perform(data)
-        data.sort_by(&:last).reverse
+        data.sort_by { |row| -row.last }
       end
     end
   end
