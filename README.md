@@ -33,7 +33,7 @@ $ rspec
 
 ## Approach description
 - Using OOP, TDD and SOLID
-- Using file with logs validations
+- Validates file existence and presence of file content
 - Capability to add new log processing
 
 ## Possible Improvements
