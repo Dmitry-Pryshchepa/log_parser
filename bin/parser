@@ -1,0 +1,11 @@
+#!/usr/bin/env ruby
+
+# frozen_string_literal: true
+
+require_relative '../lib/log_parser'
+
+raise ArgumentError, 'Specify path to file' if ARGV.size != 1
+
+file = ARGV[0]
+
+LogParser.start(file)
