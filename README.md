@@ -19,7 +19,7 @@ $ bundle install
 ## Usage
 Grant permissions:
 ```
-$ chmod +x bin/statistics_script
+$ chmod +x bin/parser
 ```
 Run app:
 ```
