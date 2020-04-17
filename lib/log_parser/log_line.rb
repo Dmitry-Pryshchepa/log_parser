@@ -2,6 +2,12 @@
 
 module LogParser
   class LogLine
+    private_class_method :new
+
+    def self.call(file_line)
+      new(*file_line.split)
+    end
+    
     attr_reader :url, :ip
 
     def initialize(url, ip)

@@ -22,7 +22,7 @@ module LogParser
     attr_reader :source, :line_builder
 
     def create_line(file_line)
-      line_builder.new(*file_line.split)
+      line_builder.call(file_line)
     end
   end
 end

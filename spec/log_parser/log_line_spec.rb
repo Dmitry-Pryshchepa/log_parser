@@ -1,10 +1,11 @@
 # frozen_string_literal: true
 
 RSpec.describe LogParser::LogLine do
-  subject { described_class.new(url, ip) }
+  subject { described_class.call(log_line) }
 
   let(:url) { '/home' }
   let(:ip) { '127.0.0.1' }
+  let(:log_line) { '/home 127.0.0.1' }
 
   describe '#initialize' do
     it 'has a valid url attribute' do

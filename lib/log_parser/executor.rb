@@ -17,17 +17,17 @@ module LogParser
     attr_reader :source
 
     def present(processor)
-      Printer.perform(decorated_data(processor))
+      ordered_data = sorter.perform(processor.perform(loaded_data))
+      decorated_data = decorator.perform(ordered_data, processor.description)
+      Printer.perform(decorated_data)
     end
 
-    def decorated_data(processor)
-      Processing::Decorator.perform(
-        processed_data(processor), processor.description
-      )
+    def sorter
+      Processing::Sorter
     end
 
-    def processed_data(processor)
-      Processing::Sorter.perform(processor.perform(loaded_data))
+    def decorator
+      Processing::Decorator
     end
 
     def loaded_data
