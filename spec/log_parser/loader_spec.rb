@@ -1,39 +1,19 @@
 # frozen_string_literal: true
 
 RSpec.describe LogParser::Loader do
-  subject { described_class.new(file) }
+  subject { described_class.call(file, reader: file_reader, builder: data_builder) }
 
   let(:file) { File.join('spec', 'fixtures', 'webserver.log') }
   let(:example_line) { ['/home 127.0.0.1'] }
+  let(:file_reader) { LogParser::FileReader }
+  let(:data_builder) { LogParser::DataBuilder }
 
-  describe '#initialize' do
-    context 'when right file' do
-      it { expect(subject.instance_variable_get(:@source)).to eq(file) }
-    end
+  describe '.call' do
+    it 'performs data loading' do
+      expect(file_reader).to receive(:call).with(file).and_return(example_line)
+      expect(data_builder).to receive(:call).with(example_line)
 
-    context 'when file not found' do
-      let(:wrong_file) { File.join('spec', 'webserver.log') }
-      subject { described_class.new(wrong_file) }
-
-      it { expect { subject }.to raise_error(LogParser::Loader::FileNotFound) }
-    end
-
-    context 'when empty file' do
-      let(:empty_file) { File.join('spec', 'fixtures', 'empty_log.log') }
-      subject { described_class.new(empty_file) }
-
-      it { expect { subject }.to raise_error(LogParser::Loader::EmptyFile) }
-    end
-  end
-
-  describe '#perform' do
-    it 'reads from file' do
-      expect(File).to receive(:readlines).with(file).and_return(example_line)
-      subject.perform
-    end
-
-    it 'creates log_line objects' do
-      expect(subject.perform.sample).to be_a_kind_of(LogParser::LogLine)
+      subject
     end
   end
 end

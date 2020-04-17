@@ -2,29 +2,24 @@
 
 module LogParser
   class Loader
-    class FileNotFound < StandardError; end
-    class EmptyFile < StandardError; end
+    private_class_method :new
 
-    def initialize(source)
+    def self.call(source, reader: FileReader, builder: DataBuilder)
+      new(source, reader, builder).perform
+    end
+
+    def initialize(source, reader, builder)
       @source = source
-      validate!
+      @reader = reader
+      @builder = builder
     end
 
     def perform
-      File.readlines(source).map(&method(:create_line))
+      builder.call(reader.call(source))
     end
 
     private
 
-    attr_reader :source
-
-    def validate!
-      raise FileNotFound unless File.exist?(source)
-      raise EmptyFile if File.empty?(source)
-    end
-
-    def create_line(file_line)
-      LogParser::LogLine.new(*file_line.split)
-    end
+    attr_reader :source, :reader, :builder
   end
 end

@@ -31,7 +31,7 @@ module LogParser
     end
 
     def loaded_data
-      @loaded_data ||= LogParser::Loader.new(source).perform
+      @loaded_data ||= LogParser::Loader.call(source)
     end
   end
 end
